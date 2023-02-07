@@ -7,6 +7,13 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import Web from './routes/web';
+
+import VueRouter from 'vue-router';
+
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    Web,
+  })
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -15,7 +22,7 @@ import Web from './routes/web';
 
 const app = createApp({});
 
-app.use(Web);
+app.use(router);
 
 /**
  * The following block of code may be used to automatically register your
