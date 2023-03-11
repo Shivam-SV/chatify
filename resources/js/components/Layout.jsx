@@ -42,7 +42,7 @@ const contacts = [
 
 export default function Layout({children}) {
   return (
-    <>        
+    <>
         {/* main */}
         <main className='layout-box font-poppins'>
             {/* Side Bar */}
@@ -68,7 +68,7 @@ export default function Layout({children}) {
                 </div>
                 <div className="flex flex-col gap-4 py-4 contacts">
                     {contacts.map((contact) => {
-                        return <Contact name={contact.name} message={contact.message} notificationCount={contact.notificationCount} isActive={contact.isActive} />
+                        return <Contact key={contact.name} name={contact.name} message={contact.message} notificationCount={contact.notificationCount} isActive={contact.isActive} />
                     })}
                 </div>
                 <div className='p-4 shadow-xl footer branding'>

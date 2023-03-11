@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
     /**
      * Holds an instance of UserService via dependency injection

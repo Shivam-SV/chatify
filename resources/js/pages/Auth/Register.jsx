@@ -1,7 +1,18 @@
 import React from 'react'
 import AuthLayout from '../../components/AuthLayout'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { RegisterNewUser } from '../../services';
 export default function Register() {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await RegisterNewUser(new FormData(event.target));
+            console.log(response);
+         } catch(err) {
+             console.error(err)
+         }
+    }
   return (
     <AuthLayout>
       <div className="w-screen p-4 rounded-md shadow-lg text-for-primary w-sc bg-primary sm:w-[26rem]">
@@ -9,10 +20,10 @@ export default function Register() {
               <h1 className='text-3xl font-bold tracking-widest text-center font-pacifico'>Chattify</h1>
           </div>
           <div className="my-4 form-section">
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div className="flex">
                   <div className="p-2 input-container">
-                      <label htmlFor="first_name" className='ml-1 text-sm'>User name</label>
+                      <label htmlFor="first_name" className='ml-1 text-sm'>First name</label>
                       <input type="text" name="first_name" id="first_name" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='First name' />
                   </div>
                   <div className="p-2 input-container">
@@ -26,7 +37,7 @@ export default function Register() {
                 </div>
                 <div className="p-2 input-container">
                     <label htmlFor="password" className='ml-1 text-sm'>Password</label>
-                    <input type="password" name="password" id="password" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
+                    <input type="password" name="password" id="password" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='Password' />
                 </div>
                 <div className="p-2 input-container">
                     <label htmlFor="password_confirmation" className='ml-1 text-sm'>Confirm Password</label>

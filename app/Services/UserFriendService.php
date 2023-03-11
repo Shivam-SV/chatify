@@ -28,7 +28,7 @@ class UserFriendService extends BaseService{
             }
             throw new ModelNotFoundException('specified user does not exist or user id is null');
         }catch(ModelNotFoundException $th){
-            return $this->repo->message(400,'error',['name' => 'response.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+            return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         }
     }
 
@@ -41,15 +41,15 @@ class UserFriendService extends BaseService{
             }
             throw new RuntimeException('specified user does not exist or user id is null');
         }catch(Throwable $th){
-            return $this->repo->message(400,'error',['name' => 'response.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+            return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         }
     }
 
     public function newFriend($validatedRequest)
     {
         $response = $this->store($validatedRequest);
-        if($response->statusCode == 200){
-            return $this->repo->message(200,'success',['name' => 'response.friend_added','values' => ['model' => $this->repo->getModelName()]]);
+        if($response->status() == 200){
+            return $this->repo->message(200,'success',['name' => 'responses.friend_added','values' => ['model' => $this->repo->getModelName()]]);
         }
         return $response;
     }
@@ -62,16 +62,16 @@ class UserFriendService extends BaseService{
                 $userFriendId = $this->repo->query()->where('user_id',$userId)->{$isMultiple ? 'whereIn' : 'where'}('friend_id',$friendId)->select('id')->get();
                 if($userFriendId){
                     if($this->delete($userFriendId)){
-                        return $this->repo->message(200,'success',['name' => 'response.friends_removed','values' => ['model' => $this->repo->getModelName()]]);
+                        return $this->repo->message(200,'success',['name' => 'responses.friends_removed','values' => ['model' => $this->repo->getModelName()]]);
                     }
                 }
                 throw new Exception('Can not find the records to delete');
             }
             throw new RuntimeException('Request does not have proper details');
         } catch(RuntimeException $th){
-            return $this->repo->message(400,'warning',['name' => 'response.broken_request','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+            return $this->repo->message(400,'warning',['name' => 'responses.broken_request','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         } catch(Throwable $th){
-            return $this->repo->message(400,'warning',['name' => 'response.unknown_error','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+            return $this->repo->message(400,'warning',['name' => 'responses.unknown_error','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         }
     }
 }

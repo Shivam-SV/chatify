@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/**
+ * Routes only for authentication purpose and registeration of user purpose
+ */
+Route::group(['module' => 'api:authentication','prefix' => 'v1','as' => 'api.v1.'],function(){
+    Route::post('/register',[UserController::class,'registerNewUser']);
 });
+
+Route::group(['module' => 'api','prefix' => 'v1','as' => 'api.v1.'],function(){
+
+});
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

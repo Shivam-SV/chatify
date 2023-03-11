@@ -84,10 +84,10 @@ class User extends Authenticatable
             ];
         }else if(request()->isMethod('POST')){
             return [
-                'first_name' => 'required|alpha|regex:/[A-Za-z]+/g',
-                'last_name' => 'required|alpha|regex:/[A-Za-z]+/g',
-                'nick_name' => 'nullable|alpha|regex:/[A-Za-z]+/g',
-                'user_name' => 'required|alpha|regex:/[A-Za-z_-.,$%^&()=+|]+/',
+                'first_name' => ['required','alpha','regex:/[A-Za-z]+/'],
+                'last_name' => ['required','alpha','regex:/[A-Za-z]+/'],
+                'nick_name' => ['nullable','alpha','regex:/[A-Za-z]+/'],
+                'user_name' => ['nullable','alpha','regex:/[A-Za-z_-.,$%^&()=+|]+/'],
                 'profile_type' => 'nullable',
                 'profile_color' => 'nullable|string',
                 'email_verified_at' => 'nullable|date',

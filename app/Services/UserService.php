@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService{
 
@@ -23,10 +24,19 @@ class UserService extends BaseService{
     public function register($validatedRequest)
     {
         $response = $this->store($validatedRequest);
-        if($response->statusCode == 200){
-            return $this->repo->message(200,'success',['name' => 'response.registered','values' => ['model' => $this->repo->getModelName()]]);
+        if($response->status() == 200){
+            return $this->repo->message(200,'success',['name' => 'responses.registered','values' => ['model' => $this->repo->getModelName()]]);
         }
         return $response;
+    }
+
+    public function prepareRequest($validatedRequest)
+    {
+        // dd($validatedRequest);
+        $prepared = $validatedRequest->all();
+        $prepared['password'] = Hash::make($prepared['password']);
+        $prepared['password_hint'] = $validatedRequest->password_confirmation;
+        return $prepared;
     }
 
     public function loginUser($validatedRequest)
@@ -39,7 +49,7 @@ class UserService extends BaseService{
             if(!auth()->check()){
                 if(User::where($authenticationMethod,$validatedRequest->user_name)->first()){
                     if(Auth::attempt([$authenticationMethod => $validatedRequest->user_name, 'password' => $$validatedRequest->password])){
-                        return $this->repo->message(200,'success',['name' => 'response.welcome','values' => ['user' => auth()->user()->name]],1,null,['user' => auth()->user()]);
+                        return $this->repo->message(200,'success',['name' => 'responses.welcome','values' => ['user' => auth()->user()->name]],1,null,['user' => auth()->user()]);
                     }
                     throw new Exception('Incorrect password');
                 }
@@ -78,7 +88,7 @@ class UserService extends BaseService{
             }
             throw new ModelNotFoundException('auth user does not exist');
         }catch(ModelNotFoundException $th){
-            return $this->repo->message(400,'error',['name' => 'response.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+            return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         }
     }
 
