@@ -4,6 +4,7 @@ import {HiEllipsisVertical} from 'react-icons/hi2';
 import {BsClockHistory, BsBookmark, BsPinAngle} from 'react-icons/bs';
 import {FiUsers} from 'react-icons/fi';
 import Contact from './Contact';
+import { ToastContainer } from 'react-toastify';
 let iconsSize = "1.2rem";
 
 const contacts = [
@@ -85,6 +86,7 @@ export default function Layout({children}) {
         <footer>
 
         </footer>
+        <ToastContainer />
     </>
   )
 }

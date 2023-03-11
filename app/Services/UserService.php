@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
+use Exception;
 use Throwable;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepository;
-use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService{
 
@@ -23,6 +24,7 @@ class UserService extends BaseService{
 
     public function register($validatedRequest)
     {
+        DB::beginTransaction();
         $response = $this->store($validatedRequest);
         if($response->status() == 200){
             return $this->repo->message(200,'success',['name' => 'responses.registered','values' => ['model' => $this->repo->getModelName()]]);
