@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+}
+
+.chat-grid-template{
+    grid-template-rows: auto 1fr auto;
+}
+.sideBar-grid-template{
+    grid-template-rows: auto auto 1fr auto;
+}
+.bg-primary{
+    @apply bg-gradient-to-r from-cyan-500 to-blue-500;
+}
+.text-for-primary{
+    @apply text-white placeholder:text-white;
+}
+
+.layout-box{
+    display: grid;
+    grid-template-columns: auto 1fr;   /* Set up the specific column sizes */
+    grid-template-rows: auto;
+}
+
+.sidebar {
+    grid-column-start: 1;     /* Starting position in the grid */
+    grid-column-end: 2;       /* Ending position in the grid */
+}
+
+.main-container {
+    grid-column-start: 2;     /* Starting position in the grid */
+    grid-column-end: 3;		 /* Ending position in the grid */
+}
+
+.overlay-text::before{
+    content: attr(data-text);
+    position: absolute;
+}
+.contact.active{
+    @apply bg-white text-cyan-500;
+}
+.trasnparent-bg-icons{
+    @apply p-2 bg-white rounded-full bg-opacity-30;
+}
+.message::after{
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;    
+    border-left: 10px solid #3b82f6;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #3b82f6;
+    border-bottom: 10px solid transparent;
+    right: -20px;
+    top: 6px;
+}
