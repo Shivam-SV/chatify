@@ -7,3 +7,7 @@ export async function RegisterNewUser(form){
     return await axios.post(routePrefix + route, form)
 }
 
+export async function loginUser(form){
+    let route = "/login";
+    return await axios.post(routePrefix + route, form)
+}

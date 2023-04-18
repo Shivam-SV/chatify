@@ -104,7 +104,7 @@ class User extends Authenticatable
     static public function AuthenticationRules()
     {
         return [
-            'user_name' => 'required|string|regex:/[A-za-z0-9.-_!@  ]+/g',
+            'user_name' => 'required|string|regex:/[A-za-z0-9.-_!@  ]+/',
             'password' => 'required|string'
         ];
     }

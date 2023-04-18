@@ -2,8 +2,27 @@ import React from 'react'
 import AuthLayout from '../../components/AuthLayout'
 import {FcGoogle} from "react-icons/fc";
 import {FaFacebookF} from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {loginUser} from "../../services/xhrHandler";
+import { notify } from '../../services/notifier';
 export default function Login() {
+    const navigate = useNavigate();
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        try{
+            const response = await loginUser(new FormData(event.target));
+            notify(response.data.message, response.data.type)
+            navigate('/');
+        }catch(err){
+            let error = err.response.data;
+            if(error.errors != undefined){
+                Object.keys(error.errors).map((input) => event.target[input].nextElementSibling.innerText = error.errors[input].join(', '));
+            }else{
+                notify(error.error, 'error');
+            }
+        }
+    }
+
   return (
     <AuthLayout>
       <div className="w-screen p-4 rounded-md shadow-lg text-for-primary w-sc bg-primary sm:w-96">
@@ -11,17 +30,17 @@ export default function Login() {
         <h1 className='text-3xl font-bold tracking-widest text-center font-pacifico'>Chattify</h1>
         </div>
         <div className="my-4 form-section">
-            <form action="">
+            <form onSubmit={handleLogin}>
                 <div className="p-2 input-container">
                     <label htmlFor="username" className='ml-1 text-sm'>User name</label>
-                    <input type="text" name="username" id="username" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
+                    <input type="text" name="user_name" id="username" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
                 </div>
                 <div className="p-2 input-container">
                     <label htmlFor="password" className='ml-1 text-sm'>Password</label>
                     <input type="password" name="password" id="password" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
                 </div>
                 <div className="grid mt-4 button-container place-items-center">
-                    <button className='px-6 py-2 font-bold bg-white rounded-lg text-cyan-500'>Login</button>
+                    <button type='submit' className='px-6 py-2 font-bold bg-white rounded-lg text-cyan-500'>Login</button>
                 </div>
             </form>
         </div>

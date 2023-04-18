@@ -27,6 +27,7 @@ class UserService extends BaseService{
         DB::beginTransaction();
         $response = $this->store($validatedRequest);
         if($response->status() == 200){
+            DB::commit();
             return $this->repo->message(200,'success',['name' => 'responses.registered','values' => ['model' => $this->repo->getModelName()]]);
         }
         return $response;
@@ -50,7 +51,7 @@ class UserService extends BaseService{
             #checks if the user is already logged in or not
             if(!auth()->check()){
                 if(User::where($authenticationMethod,$validatedRequest->user_name)->first()){
-                    if(Auth::attempt([$authenticationMethod => $validatedRequest->user_name, 'password' => $$validatedRequest->password])){
+                    if(Auth::attempt([$authenticationMethod => $validatedRequest->user_name, 'password' => $validatedRequest->password])){
                         return $this->repo->message(200,'success',['name' => 'responses.welcome','values' => ['user' => auth()->user()->name]],1,null,['user' => auth()->user()]);
                     }
                     throw new Exception('Incorrect password');

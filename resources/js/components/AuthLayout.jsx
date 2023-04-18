@@ -1,5 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
 
 export default function AuthLayout({ children }) {
     return (
@@ -9,7 +8,7 @@ export default function AuthLayout({ children }) {
                     {children}
                 </div>
             </main>
-            <ToastContainer />
+
         </>
     );
 }
