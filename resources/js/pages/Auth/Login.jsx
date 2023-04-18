@@ -3,7 +3,7 @@ import AuthLayout from '../../components/AuthLayout'
 import {FcGoogle} from "react-icons/fc";
 import {FaFacebookF} from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import {loginUser} from "../../services/xhrHandler";
+import {loginUser, generateAuthToken} from "../../services/xhrHandler";
 import { notify } from '../../services/notifier';
 export default function Login() {
     const navigate = useNavigate();
@@ -11,8 +11,11 @@ export default function Login() {
         event.preventDefault();
         try{
             const response = await loginUser(new FormData(event.target));
-            notify(response.data.message, response.data.type)
-            navigate('/');
+            if(response.data.status === 'success' && response.data.user != undefined){
+                const {data} = generateAuthToken(response.data.user.id);
+            }
+            // notify(response.data.message, response.data.type)
+            // navigate('/');
         }catch(err){
             let error = err.response.data;
             if(error.errors != undefined){

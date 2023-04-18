@@ -18,5 +18,7 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'already_login' => 'Someone is already logged in with there credentials, please log out first then try to login',
     'already_logout' => 'Some how, you are logged out, already!',
-    'logout' => 'Logged out! Bye, Have a good day'
+    'logout' => 'Logged out! Bye, Have a good day',
+    'token_generated' => 'New auth token has been generated',
+    'user_found' => "User found with these details"
 ];

@@ -48,9 +48,14 @@ class UserController extends Controller
         return $this->service->logoutUser();
     }
 
-    public function profile(Request $request)
+    public function profile(Request $request, $id)
     {
-        $userId = $request->userId ? $request->userId : (auth()->check() ? auth()->id() : null);
+        $userId = $id ? $id : ($request->userId ? $request->userId : (auth()->check() ? auth()->id() : null));
         return $this->service->UserDetails($userId);
+    }
+
+    public function generateToken($id, Request $request)
+    {
+        return $this->service->generateApiToken($id);
     }
 }
