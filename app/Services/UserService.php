@@ -46,13 +46,13 @@ class UserService extends BaseService{
     {
         try{
             # determine the authentication method by which the user authenticated. Possible types (phone, email, user_name)
-            $authenticationMethod = preg_match_all("/[0-9]+/",$validatedRequest->user_name) ? 'phone' : (filter_var($validatedRequest->user_name, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name');
+            $authenticationMethod = filter_var($validatedRequest->user_name, FILTER_VALIDATE_INT) ? 'phone' : (filter_var($validatedRequest->user_name, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name');
 
             #checks if the user is already logged in or not
             if(!auth()->check()){
                 if(User::where($authenticationMethod,$validatedRequest->user_name)->first()){
                     if(Auth::attempt([$authenticationMethod => $validatedRequest->user_name, 'password' => $validatedRequest->password])){
-                        return $this->repo->message(200,'success',['name' => 'responses.welcome','values' => ['user' => auth()->user()->name]],1,null,['user' => auth()->user()]);
+                        return $this->repo->message(200,'success',['name' => 'responses.welcome','values' => ['user' => auth()->user()->first_name]],1,null,['user' => auth()->user()]);
                     }
                     throw new Exception('Incorrect password');
                 }
@@ -87,11 +87,23 @@ class UserService extends BaseService{
     {
         try{
             if($userId){
-                return User::with('friends')->find($userId);
+                $user = User::with('friends')->find($userId);
+                return $this->repo->message(200,'success',['name' => 'auth.user_found'],5,null, ['user' => $user]);
             }
             throw new ModelNotFoundException('auth user does not exist');
         }catch(ModelNotFoundException $th){
             return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+        }
+    }
+
+    public function generateApiToken($userId)
+    {
+        try{
+            $user = User::findOrFail($userId);
+            $token = $user->createToken('chattify-user-'.$userId);
+            return $this->repo->message(200, 'success',['name' => 'auth.token_generated'], 2, null, ['token' => $token->plainTextToken]);
+        }catch(ModelNotFoundException $err){
+            return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$err->getMessage());
         }
     }
 

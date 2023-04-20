@@ -21,10 +21,11 @@ use App\Http\Controllers\UserController;
 Route::group(['module' => 'api:authentication','prefix' => 'v1','as' => 'api.v1.'],function(){
     Route::post('/register',[UserController::class,'registerNewUser']);
     Route::post('/login',[UserController::class,'login']);
+    Route::post('/auth/{id}/generate-token',[UserController::class, 'generateToken']);
 });
 
-Route::group(['module' => 'api','prefix' => 'v1','as' => 'api.v1.'],function(){
-
+Route::group(['module' => 'api','prefix' => 'v1','as' => 'api.v1.', 'middleware' => 'auth:sanctum'],function(){
+    Route::get('/user/{id}',[UserController::class, 'profile'])
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -89,7 +89,7 @@ abstract class BaseRepository{
 
     public function message($statusCode,$messageType, $messageKey,$priority = 1,$actualError = null, $extraContent = [])
     {
-        $response = [
+        $response = array_merge([
             'status' => $messageType,
             'statusBool' => $statusCode == 200 ? true : false,
             'message' => __("{$messageKey['name']}",array_key_exists('values',$messageKey) ? $messageKey['values'] : []),
@@ -97,8 +97,8 @@ abstract class BaseRepository{
             'messageReplacers' =>array_key_exists('values',$messageKey) ? $messageKey['values'] : [],
             'priority' => in_array($priority,$this->priorities) ? $priority : 1,
             'errorBool' => ($statusCode != 200 && $actualError != null) ? true : false,
-            'error' => $actualError
-        ];
+            'error' => $actualError,
+        ], $extraContent);
 
         return response($response,$statusCode);
     }
