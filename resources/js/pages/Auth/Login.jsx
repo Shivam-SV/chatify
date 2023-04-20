@@ -11,7 +11,7 @@ export default function Login() {
         event.preventDefault();
         try{
             const response = await loginUser(new FormData(event.target));
-            notify(response.data.message, response.data.type)
+            notify(response.data.message, response.data.status)
             navigate('/');
         }catch(err){
             let error = err.response.data;

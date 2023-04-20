@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
 
 export function notify(Message, type = null){
-    const toastID = toast.success(Message,{
+    let callback = type == null ? toast : toast[type];
+    const toastID = callback(Message,{
         position: "bottom-center",
         autoClose: 5000,
         closeOnClick: true,
