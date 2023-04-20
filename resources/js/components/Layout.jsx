@@ -39,25 +39,25 @@ const contacts = [
         isActive: false
     },
     {
-        name: 'Shawn',
+        name: 'Shawn2',
         message: 'Hey, buddy what\'s up?',
         notificationCount: 3,
         isActive: false
     },
     {
-        name: 'Shawn',
+        name: 'Shawn3',
         message: 'Hey, buddy what\'s up?',
         notificationCount: 3,
         isActive: false
     },
     {
-        name: 'Shawn',
+        name: 'Shawn4',
         message: 'Hey, buddy what\'s up?',
         notificationCount: 3,
         isActive: false
     },
     {
-        name: 'Shawn',
+        name: 'Shawn5',
         message: 'Hey, buddy what\'s up?',
         notificationCount: 3,
         isActive: false
@@ -91,7 +91,7 @@ export default function Layout({children}) {
                         <span className='trasnparent-bg-icons'><BsPinAngle size={iconsSize}/></span>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4 py-4 overflow-y-auto contacts">
+                <div className="flex flex-col gap-4 py-4 overflow-y-auto contacts" style={{boxShadow: "-2px 2px 16px 0px rgba(0,0,0,0.38) inset"}}>
                     {contacts.map((contact) => {
                         return <Contact key={contact.name} name={contact.name} message={contact.message} notificationCount={contact.notificationCount} isActive={contact.isActive} />
                     })}

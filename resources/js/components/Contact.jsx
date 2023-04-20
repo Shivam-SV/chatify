@@ -7,7 +7,7 @@ export default function Contact({name, message, notificationCount, isActive}) {
             <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="user profile" className='rounded-full w-11' />
             <div className="info">
                 <h1 className="text-lg name">{name}</h1>
-                <p className="text-sm truncate bg-opacity-90 text-ellipsis w-36">{message}</p>
+                <p className="text-sm truncate bg-opacity-90 text-ellipsis w-36">{message || null}</p>
             </div>
         </div>
         <div className="notifies">
