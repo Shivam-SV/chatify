@@ -12,14 +12,14 @@ const messages = [
     {
         messsage: "Hy Emma, How's up",
         fromUserId: 2,
-        toUserId:1,        
+        toUserId:1,
     },
 ];
 export default function ChatRoom() {
   return (
     <>
-        
-        <div className='grid h-screen chat-grid-template'>
+
+        <div className='grid h-[97vh] chat-grid-template'>
             {/* Profile Header */}
             <nav className='container flex items-center justify-between p-3 mx-auto shadow-md'>
                 <div className="flex items-center gap-3 left-section">
@@ -34,7 +34,7 @@ export default function ChatRoom() {
                     <span className='p-2 rounded-full text-for-primary bg-primary'><FaUser size={iconsSize} /></span>
                 </div>
             </nav>
-            <div className="overflow-y-auto messages">
+            <div className="messages">
                 <div className="container flex p-4 mx-auto">
                     <Message />
                 </div>

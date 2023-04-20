@@ -5,17 +5,27 @@ import {FaFacebookF} from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import {loginUser, generateAuthToken} from "../../services/xhrHandler";
 import { notify } from '../../services/notifier';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuth } from '../../stores/AuthReducer';
 export default function Login() {
     const navigate = useNavigate();
+    const auth = useSelector(state => state.auth);
+    const authDispatcher = useDispatch();
+
+
     const handleLogin = async (event) => {
         event.preventDefault();
         try{
             const response = await loginUser(new FormData(event.target));
             if(response.data.status === 'success' && response.data.user != undefined){
-                const {data} = generateAuthToken(response.data.user.id);
+                const tokenResponse = await generateAuthToken(response.data.user.id);
+                if(tokenResponse.data.token != null){
+                    authDispatcher(setAuth({token: tokenResponse.data.token, id: response.data.user.id}));
+                    notify(response.data.message, response.data.status)
+                    navigate('/');
+                }
             }
-            // notify(response.data.message, response.data.type)
-            // navigate('/');
+
         }catch(err){
             let error = err.response.data;
             if(error.errors != undefined){
@@ -36,11 +46,11 @@ export default function Login() {
             <form onSubmit={handleLogin}>
                 <div className="p-2 input-container">
                     <label htmlFor="username" className='ml-1 text-sm'>User name</label>
-                    <input type="text" name="user_name" id="username" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
+                    <input type="text" name="user_name" id="username" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='Use your username/email/phone' />
                 </div>
                 <div className="p-2 input-container">
                     <label htmlFor="password" className='ml-1 text-sm'>Password</label>
-                    <input type="password" name="password" id="password" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='User name' />
+                    <input type="password" name="password" id="password" className='w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary' placeholder='Password' />
                 </div>
                 <div className="grid mt-4 button-container place-items-center">
                     <button type='submit' className='px-6 py-2 font-bold bg-white rounded-lg text-cyan-500'>Login</button>

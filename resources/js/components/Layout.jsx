@@ -37,6 +37,30 @@ const contacts = [
         message: 'Hey, buddy what\'s up?',
         notificationCount: 3,
         isActive: false
+    },
+    {
+        name: 'Shawn',
+        message: 'Hey, buddy what\'s up?',
+        notificationCount: 3,
+        isActive: false
+    },
+    {
+        name: 'Shawn',
+        message: 'Hey, buddy what\'s up?',
+        notificationCount: 3,
+        isActive: false
+    },
+    {
+        name: 'Shawn',
+        message: 'Hey, buddy what\'s up?',
+        notificationCount: 3,
+        isActive: false
+    },
+    {
+        name: 'Shawn',
+        message: 'Hey, buddy what\'s up?',
+        notificationCount: 3,
+        isActive: false
     }
 
 ];
@@ -47,7 +71,7 @@ export default function Layout({children}) {
         {/* main */}
         <main className='layout-box font-poppins'>
             {/* Side Bar */}
-            <aside className='grid h-screen overflow-y-auto shadow-md text-for-primary sidebar bg-primary min-w-20 sideBar-grid-template'>
+            <aside className='grid h-[97vh] overflow-y-auto shadow-md text-for-primary sidebar bg-primary min-w-20 sideBar-grid-template'>
                 {/* Branding section */}
                 <div className="flex items-center justify-between p-4 branding">
                     <h1 className='text-2xl font-bold tracking-widest font-pacifico'>Chattify</h1>
@@ -67,7 +91,7 @@ export default function Layout({children}) {
                         <span className='trasnparent-bg-icons'><BsPinAngle size={iconsSize}/></span>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4 py-4 contacts">
+                <div className="flex flex-col gap-4 py-4 overflow-y-auto contacts">
                     {contacts.map((contact) => {
                         return <Contact key={contact.name} name={contact.name} message={contact.message} notificationCount={contact.notificationCount} isActive={contact.isActive} />
                     })}
