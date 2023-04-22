@@ -18,6 +18,11 @@ export async function generateAuthToken(userID){
 }
 
 export async function getUser(userId){
-    let route = `/user/${userId}`;
+    let route = `/user/${userId}/profile`;
+    return await axios.get(routePrefix + route);
+}
+
+export async function myFriends(userId){
+    let route = `/user/${userId}/myfriends`;
     return await axios.get(routePrefix + route);
 }

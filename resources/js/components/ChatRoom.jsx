@@ -19,7 +19,7 @@ export default function ChatRoom() {
   return (
     <>
 
-        <div className='grid h-[97vh] chat-grid-template'>
+        <div className='grid h-[100%] chat-grid-template'>
             {/* Profile Header */}
             <nav className='container flex items-center justify-between p-3 mx-auto shadow-md'>
                 <div className="flex items-center gap-3 left-section">
@@ -35,7 +35,7 @@ export default function ChatRoom() {
                 </div>
             </nav>
             <div className="messages">
-                <div className="container flex p-4 mx-auto">
+                <div className="container flex flex-col gap-2 p-4 mx-auto">
                     <Message />
                 </div>
             </div>

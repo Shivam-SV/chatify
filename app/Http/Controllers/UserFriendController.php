@@ -26,9 +26,9 @@ class UserFriendController extends Controller
      *
      * @return \App\Http\Resources\UserFriendsResource
      */
-    public function myFriends(Request $request)
+    public function myFriends(Request $request, $id)
     {
-        $userId = $request->userId ? $request->userId : (auth()->check() ? auth()->id() : null);
+        $userId = $id ? $id : ($request->userId ? $request->userId : (auth()->check() ? auth()->id() : null));
         return !$request->friendId ? $this->service->listAllFriends($userId,$request->relation) : $this->service->listFriend($userId, $request->friendId);
     }
 

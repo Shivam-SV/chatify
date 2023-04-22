@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .chat-grid-template{
     grid-template-rows: auto 1fr auto;
 }
@@ -41,7 +45,11 @@
 .trasnparent-bg-icons{
     @apply p-2 bg-white rounded-full bg-opacity-30;
 }
-.message::after{
+.send__message {
+    position: relative;
+    right: 20px;
+}
+.send__message::after{
     content: "";
     width: 0px;
     height: 0px;
@@ -52,4 +60,14 @@
     border-bottom: 10px solid transparent;
     right: -20px;
     top: 6px;
+}
+.contacts{
+    height: calc(100vh - 236px);
+}
+.messages{
+    height: calc(100vh - 124px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }

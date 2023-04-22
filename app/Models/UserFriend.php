@@ -16,14 +16,14 @@ class UserFriend extends Model
         'relation'
     ];
 
-    public static $relations = ['stranger','friend','best friend','family'];
+    public static $UserRelations = ['stranger','friend','best friend','family'];
 
     static public function rules()
     {
         return [
             'user_id' => 'required|integer',
             'friend_id' => 'required|integer',
-            'relation' => ['nullable',Rule::in(self::$relations)]
+            'relation' => ['nullable',Rule::in(self::$UserRelations)]
         ];
     }
 }
