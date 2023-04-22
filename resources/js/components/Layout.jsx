@@ -26,7 +26,6 @@ export default function Layout({ children }) {
     const searchUser = async (event) => {
         let response = {};
         try{
-            console.log(event.target.value);
             if(event.target.value != ''){
                 response = await findUserByKeyword(event.target.value, auth.id);
             }

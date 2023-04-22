@@ -18,7 +18,6 @@ const messages = [
 export default function ChatRoom() {
   return (
     <>
-
         <div className='grid h-[100%] chat-grid-template'>
             {/* Profile Header */}
             <nav className='container flex items-center justify-between p-3 mx-auto shadow-md'>
