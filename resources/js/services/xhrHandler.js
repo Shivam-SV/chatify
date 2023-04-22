@@ -27,7 +27,7 @@ export async function myFriends(userId, token = null){
     return await axios.get(routePrefix + route);
 }
 
-export async function findUserByKeyword(keyword){
-    let route = `/users/find?keyword=${keyword}`;
-    return await axios.get(routePrefix + route, {keyword: keyword});
+export async function findUserByKeyword(keyword, userId = null){
+    let route = `/users/find?keyword=${keyword}&userId=${userId}`;
+    return await axios.get(routePrefix + route);
 }

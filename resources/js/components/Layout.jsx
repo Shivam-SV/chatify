@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { BsClockHistory, BsBookmark, BsPinAngle } from "react-icons/bs";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
 import Contact from "./Contact";
 import { ToastContainer } from "react-toastify";
@@ -10,64 +11,6 @@ import { useSelector } from "react-redux";
 import {findUserByKeyword} from "../services/xhrHandler";
 
 let iconsSize = "1.2rem";
-
-const contacts = [
-    {
-        name: 'Martin',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 0,
-        isActive: false
-    },
-    {
-        name: 'Anna',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 2,
-        isActive: false
-    },
-    {
-        name: 'Goige',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 0,
-        isActive: true
-    },
-    {
-        name: 'Jade',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 4,
-        isActive: false
-    },
-    {
-        name: 'Shawn',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 3,
-        isActive: false
-    },
-    {
-        name: 'Shawn2',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 3,
-        isActive: false
-    },
-    {
-        name: 'Shawn3',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 3,
-        isActive: false
-    },
-    {
-        name: 'Shawn4',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 3,
-        isActive: false
-    },
-    {
-        name: 'Shawn5',
-        message: 'Hey, buddy what\'s up?',
-        notificationCount: 3,
-        isActive: false
-    }
-
-];
 
 export default function Layout({ children }) {
     const auth = useSelector((state) => state.auth);
@@ -80,11 +23,18 @@ export default function Layout({ children }) {
         console.log(error);
     }
 
-    const searchUser = (event) => {
-        let response = findUserByKeyword(event.target.value);
-        setSearchedUsers(response.data);
+    const searchUser = async (event) => {
+        let response = {};
+        try{
+            console.log(event.target.value);
+            if(event.target.value != ''){
+                response = await findUserByKeyword(event.target.value, auth.id);
+            }
+            setSearchedUsers(response?.data?.data || []);
+        }catch(err){
+            console.log(err);
+        }
     }
-    console.log(searchedUsers);
     return (
         <>
             {/* main */}
@@ -102,7 +52,7 @@ export default function Layout({ children }) {
                         </span>
                     </div>
                     <div className="p-4 navigations">
-                        <div className="search-box">
+                        <div className="relative search-box">
                             <input
                                 type="search"
                                 name="search"
@@ -111,6 +61,18 @@ export default function Layout({ children }) {
                                 placeholder="Search Chattify"
                                 onInput={searchUser}
                             />
+                            <div className="absolute w-full p-1 bg-white suggestion-box z-2" style={searchedUsers.length == 0 ? {display:'none'} : {}}>
+                                <ul className="suggestions">
+                                    {searchedUsers.length > 0 ? searchedUsers.map(user => {
+                                        return (
+                                        <li key={user.id} className="flex items-center justify-between p-2 text-black">
+                                            <span>{user.first_name} {user.last_name}</span>
+                                            {!user.is_friend ? (<span className="text-blue-500"><AiOutlineUserAdd /></span>) : (<></>)}
+                                        </li>
+                                    )
+                                    }) : (<></>)}
+                                </ul>
+                            </div>
                         </div>
                         <div className="flex items-center justify-between py-2 navs">
                             <span className="trasnparent-bg-icons">

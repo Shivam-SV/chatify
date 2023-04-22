@@ -28,7 +28,7 @@ Route::group(['module' => 'api:authentication','prefix' => 'v1','as' => 'api.v1.
 Route::group(['module' => 'api','prefix' => 'v1','as' => 'api.v1.', 'middleware' => 'auth:sanctum'],function(){
     Route::get('/user/{id}/profile',[UserController::class, 'profile']);
     Route::get('user/{id}/myfriends', [UserFriendController::class, 'myFriends']);
-    Route::get('users/find',[UserFriendController::class, 'findFrined']);
+    Route::get('users/find',[UserController::class, 'findFrined']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

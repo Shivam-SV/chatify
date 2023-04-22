@@ -58,4 +58,11 @@ class UserController extends Controller
     {
         return $this->service->generateApiToken($id);
     }
+
+    public function findFrined(Request $request)
+    {
+        $keyword = $request->keyword;
+        $userId = $request->userId;
+        return $this->service->findUserByKeyword($keyword, $userId);
+    }
 }

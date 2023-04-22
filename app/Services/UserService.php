@@ -5,10 +5,13 @@ namespace App\Services;
 use Exception;
 use Throwable;
 use App\Models\User;
+use RuntimeException;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\UserFriendsResource;
+use App\Models\UserFriend;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -107,4 +110,28 @@ class UserService extends BaseService{
         }
     }
 
+    public function findUserByKeyword($keyword, $userId = null)
+    {
+        try{
+            if($keyword){
+                $users = User::where('first_name','LIKE', "%$keyword%")
+                    ->orWhere('last_name','like',"%$keyword%")
+                    ->orWhere('user_name',"like","%$keyword%")
+                    ->orWhere('phone',"like","%$keyword%")
+                    ->orWhere('email',"like","%$keyword%")
+                    ->orWhere('nick_name',"like","%$keyword%")->get();
+                if($userId){
+                    $friendsId = UserFriend::where('user_id', $userId)->whereIn('friend_id', $users->pluck('id'))->select('id')->get();
+                    $users = $users->map(function($user) use($friendsId){
+                        $user->is_friend = $friendsId->has($user->id) ? true : false;
+                        return $user;
+                    });
+                }
+                return UserFriendsResource::collection($users);
+            }
+            throw new RuntimeException('specified user does not exist or user id is null');
+        }catch(Throwable $th){
+            return $this->repo->message(400,'error',['name' => 'responses.model_not_found','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+        }
+    }
 }

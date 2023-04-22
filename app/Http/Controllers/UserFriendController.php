@@ -53,10 +53,4 @@ class UserFriendController extends Controller
         $userId = $request->userId ? $request->userId : (auth()->check() ? auth()->id() : null);
         return $this->service->deleteFriend($userId, $request->friendId);
     }
-
-    public function findFrined(Request $request)
-    {
-        $keyword = $request->keyword;
-        return $this->service->findUserByKeyword($keyword);
-    }
 }
