@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { BsClockHistory, BsBookmark, BsPinAngle } from "react-icons/bs";
@@ -7,6 +7,8 @@ import Contact from "./Contact";
 import { ToastContainer } from "react-toastify";
 import { myFriends } from "../services/xhrHandler";
 import { useSelector } from "react-redux";
+import {findUserByKeyword} from "../services/xhrHandler";
+
 let iconsSize = "1.2rem";
 
 const contacts = [
@@ -68,14 +70,21 @@ const contacts = [
 ];
 
 export default function Layout({ children }) {
+    const auth = useSelector((state) => state.auth);
+    const [searchedUsers, setSearchedUsers] = useState([]);
     const Friends = [];
     try {
-        const userId = useSelector((state) => state.auth.id);
-        let response = myFriends(userId);
+        let response = myFriends(auth.id, auth.token);
         Friends == response?.data;
     } catch (error) {
         console.log(error);
     }
+
+    const searchUser = (event) => {
+        let response = findUserByKeyword(event.target.value);
+        setSearchedUsers(response.data);
+    }
+    console.log(searchedUsers);
     return (
         <>
             {/* main */}
@@ -100,6 +109,7 @@ export default function Layout({ children }) {
                                 id="search"
                                 className="w-full px-2 py-1 bg-white bg-opacity-25 border-none outline-none text-for-primary"
                                 placeholder="Search Chattify"
+                                onInput={searchUser}
                             />
                         </div>
                         <div className="flex items-center justify-between py-2 navs">
@@ -124,8 +134,8 @@ export default function Layout({ children }) {
                                 "-2px 2px 16px 0px rgba(0,0,0,0.38) inset",
                         }}
                     >
-                        {contacts.length > 0 ? (
-                            contacts.map((contact) => {
+                        {Friends.length > 0 ? (
+                            Friends.map((contact) => {
                                 return (
                                     <Contact
                                         key={contact.name}
@@ -139,7 +149,7 @@ export default function Layout({ children }) {
                                 );
                             })
                         ) : (
-                            <span className="p-2 break-words">
+                            <span className="p-2 text-center text-opacity-75 break-words">
                                 👋🏼 No friends yet, hit search to add new friends
                             </span>
                         )}

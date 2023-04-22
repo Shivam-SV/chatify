@@ -22,7 +22,12 @@ export async function getUser(userId){
     return await axios.get(routePrefix + route);
 }
 
-export async function myFriends(userId){
+export async function myFriends(userId, token = null){
     let route = `/user/${userId}/myfriends`;
     return await axios.get(routePrefix + route);
+}
+
+export async function findUserByKeyword(keyword){
+    let route = `/users/find?keyword=${keyword}`;
+    return await axios.get(routePrefix + route, {keyword: keyword});
 }

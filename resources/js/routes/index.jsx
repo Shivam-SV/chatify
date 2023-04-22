@@ -1,20 +1,32 @@
-import {createBrowserRouter} from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Home from "../pages/Home";
 
-const router = createBrowserRouter([
-    {
+const router = (isLoggedIn) => [
+    {// Private Routes
         path: '/',
-        element: <Home />
+        element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
+        children: [
+            {
+                path:'/',
+                element: <Home />
+            },
+        ]
     },
     {
-        path: '/login',
-        element: <Login />
-    },{
-        path: '/register',
-        element: <Register />
+        path: '/',
+        element: !isLoggedIn ? <Outlet /> : <Navigate to="/" />,
+        children: [
+            {
+                path: '/login',
+                element: <Login />
+            },{
+                path: '/register',
+                element: <Register />
+            }
+        ]
     }
-]);
+];
 
 export default router;

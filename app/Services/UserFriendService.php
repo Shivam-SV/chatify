@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\UserFriendRepository;
 use App\Http\Resources\UserFriendsResource;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
@@ -72,6 +73,23 @@ class UserFriendService extends BaseService{
             return $this->repo->message(400,'warning',['name' => 'responses.broken_request','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
         } catch(Throwable $th){
             return $this->repo->message(400,'warning',['name' => 'responses.unknown_error','values' => ['model' => $this->repo->getModelName()]],5,$th->getMessage());
+        }
+    }
+
+    public function findUserByKeyword($keyword)
+    {
+        try{
+            if($keyword){
+                $users = User::where('first_name','LIKE', "%$keyword%")
+                    ->orWhere('last_name','like',"%$keyword%")
+                    ->orWhere('user_name',"like","%$keyword%")
+                    ->orWhere('phone',"like","%$keyword%")
+                    ->orWhere('email',"like","%$keyword%")
+                    ->orWhere('nick_name',"like","%$keyword%");
+                return UserFriendsResource::collection($users->get());
+            }
+        }catch(Throwable $th){
+            return [$th];
         }
     }
 }
