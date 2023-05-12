@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Home from "../pages/Home";
+import Profile from "../pages/Profile";
 
 const router = (isLoggedIn) => [
     {// Private Routes
@@ -12,6 +13,10 @@ const router = (isLoggedIn) => [
                 path:'/',
                 element: <Home />
             },
+            {
+                path: '/me',
+                element: <Profile />
+            }
         ]
     },
     {

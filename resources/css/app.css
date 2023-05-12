@@ -71,3 +71,13 @@
     flex-direction: column;
     justify-content: flex-end;
 }
+
+.profile-nav .active{
+    @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-white
+}
+.inputable{
+    @apply p-3;
+}
+.hero-labels{
+    @apply text-xl font-bold;
+}
