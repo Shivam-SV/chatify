@@ -29,29 +29,33 @@ export default function Profile() {
             <div className='col-span-9'>
                 <nav className='p-3 profile-nav'>
                     <ul className='flex gap-4'>
-                        <li onClick={() => toggleNav('basic')} role='tab' className={'px-4 py-2 rounded-full ' + (activeNav == 'basic' ? 'active' : '')}><button>Basic</button></li>
-                        <li onClick={() => toggleNav('personal')} role='tab' className={'px-4 py-2 rounded-full ' + (activeNav == 'personal' ? 'active' : '')}><button>Personal</button></li>
-                        <li onClick={() => toggleNav('security')} role='tab' className={'px-4 py-2 rounded-full ' + (activeNav == 'security' ? 'active' : '')}><button>Security</button></li>
-                        <li onClick={() => toggleNav('settings')} role='tab' className={'px-4 py-2 rounded-full ' + (activeNav == 'settings' ? 'active' : '')}><button>Settings</button></li>
+                        <li onClick={() => toggleNav('basic')} role='tab' aria-labelledby='basic-tab' aria-expanded={activeNav == 'basic' ? true : false} className={'px-4 py-2 rounded-full ' + (activeNav == 'basic' ? 'active' : '')}><button>Basic</button></li>
+                        <li onClick={() => toggleNav('personal')} role='tab' aria-labelledby='personal-tab' aria-expanded={activeNav == 'personal' ? true : false} className={'px-4 py-2 rounded-full ' + (activeNav == 'personal' ? 'active' : '')}><button>Personal</button></li>
+                        <li onClick={() => toggleNav('security')} role='tab' aria-labelledby='security-tab' aria-expanded={activeNav == 'security' ? true : false} className={'px-4 py-2 rounded-full ' + (activeNav == 'security' ? 'active' : '')}><button>Security</button></li>
+                        <li onClick={() => toggleNav('settings')} role='tab' aria-labelledby='settings-tab' aria-expanded={activeNav == 'settings' ? true : false} className={'px-4 py-2 rounded-full ' + (activeNav == 'settings' ? 'active' : '')}><button>Settings</button></li>
                     </ul>
                 </nav>
-                <div className="mt-4 formable-box">
-                    <div className="grid grid-cols-12">
-                        <div className="col-span-4 p-2">
-                            <label htmlFor="first_name" className='hero-labels'>First Name</label>
-                            <span className="block inputable">Emma</span>
-                        </div>
-                        <div className="col-span-4 p-2">
-                            <label htmlFor="first_name" className='hero-labels'>First Name</label>
-                            <span className="block inputable">Emma</span>
-                        </div>
-                        <div className="col-span-4 p-2">
-                            <label htmlFor="first_name" className='hero-labels'>First Name</label>
-                            <span className="block inputable">Emma</span>
-                        </div>
-                        <div className="col-span-4 p-2">
-                            <label htmlFor="first_name" className='hero-labels'>First Name</label>
-                            <span className="block inputable">Emma</span>
+                <div className="tab-content">
+                    <div role='tablist' id='basic'>
+                        <div className="mt-4 formable-box">
+                            <div className="grid grid-cols-12">
+                                <div className="col-span-4 p-2">
+                                    <label htmlFor="first_name" className='hero-labels'>First Name</label>
+                                    <span className="block inputable">Emma</span>
+                                </div>
+                                <div className="col-span-4 p-2">
+                                    <label htmlFor="first_name" className='hero-labels'>First Name</label>
+                                    <span className="block inputable">Emma</span>
+                                </div>
+                                <div className="col-span-4 p-2">
+                                    <label htmlFor="first_name" className='hero-labels'>First Name</label>
+                                    <span className="block inputable">Emma</span>
+                                </div>
+                                <div className="col-span-4 p-2">
+                                    <label htmlFor="first_name" className='hero-labels'>First Name</label>
+                                    <span className="block inputable">Emma</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
