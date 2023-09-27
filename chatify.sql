@@ -1,0 +1,54 @@
+CREATE TABLE Users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Conversations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Participants (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  conversation_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (conversation_id) REFERENCES Conversations(id)
+);
+
+CREATE TABLE Messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  conversation_id INT NOT NULL,
+  sender_id INT NOT NULL,
+  content TEXT NOT NULL,
+  timestamp TIMESTAMP NOT NULL,
+  FOREIGN KEY (conversation_id) REFERENCES Conversations(id),
+  FOREIGN KEY (sender_id) REFERENCES Users(id)
+);
+
+CREATE TABLE Friendship (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  friend_id INT NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  initiator_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (friend_id) REFERENCES Users(id),
+  FOREIGN KEY (initiator_id) REFERENCES Users(id)
+);
+
+CREATE TABLE BlockedUsers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  blocked_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (blocked_id) REFERENCES Users(id)
+);
