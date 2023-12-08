@@ -11,11 +11,11 @@ export default function Login(){
                 <div className="card-body p-4 mt-3">
                     <div className="input-group">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" className="input input-bordered w-full max-w-xs" placeholder="Email/Username" />
+                        <input type="text" id="username" className="input input-bordered w-full max-w-xs bg-transparent" placeholder="Email/Username" />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" className="input input-bordered w-full max-w-xs" placeholder="Some Secrets" />
+                        <input type="password" id="password" className="input input-bordered w-full max-w-xs bg-transparent" placeholder="Some Secrets" />
                     </div>
                     <div className="input-group text-center">
                         <button className="btn btn-primary btn-sm"><i className='bx bx-lock-open-alt'></i> Sign Up</button>
