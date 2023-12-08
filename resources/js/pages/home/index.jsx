@@ -1,5 +1,6 @@
-import Chats from "../chats/chats";
+import Chats from "../chats";
 import AppLayout from "../../layouts/AppLayout";
+import Chat from "../chat";
 
 export default function Home(){
     return (
@@ -9,7 +10,7 @@ export default function Home(){
                     <Chats />
                 </div>
                 <div className="col-span-9">
-
+                    <Chat />
                 </div>
             </div>
         </AppLayout>
