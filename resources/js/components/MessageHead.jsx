@@ -6,7 +6,7 @@ export default function MessageHead(){
                     <img src="https://placehold.co/40x40" alt="Kina west" />
 
                     <div className="info-titles">
-                        <h1 className="text-xl font-bold">Kina West</h1>
+                        <h1 className="text-xl font-bold leading-6">Kina West</h1>
                         <p className="status"> <span className="inline-block w-2 h-2 bg-primary rounded-full"></span> Online</p>
                     </div>
                 </div>

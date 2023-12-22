@@ -1,6 +1,6 @@
 export default function ChatsFooter(){
     return (
-        <div className="flex p-3 justify-between h-full items-center">
+        <div className="flex px-3 py-1 justify-between h-full items-center">
             <div className="me-section flex gap-4">
                 <img src="https://placehold.co/40x40" alt="You" />
                 <div className="me-info-section">
