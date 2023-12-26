@@ -1,3 +1,4 @@
+import ChatContacts from "../../components/ChatContacts";
 import ChatsFooter from "../../components/ChatsFooter";
 import ChatsHeader from "../../components/ChatsHeader";
 
@@ -8,8 +9,8 @@ export default function Chats(){
                 <div className="border-b border-primary-content">
                     <ChatsHeader />
                 </div>
-                <div className="grow">
-
+                <div className="grow overflow-y-auto">
+                    <ChatContacts />
                 </div>
                 <div className="border-t border-primary-content">
                     <ChatsFooter />
