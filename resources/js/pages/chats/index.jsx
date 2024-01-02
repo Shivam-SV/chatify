@@ -12,9 +12,9 @@ export default function Chats(){
                 <div className="grow overflow-y-auto">
                     <ChatContacts />
                 </div>
-                <div className="border-t border-primary-content">
+                {/* <div className="border-t border-primary-content">
                     <ChatsFooter />
-                </div>
+                </div> */}
             </div>
         </>
     );

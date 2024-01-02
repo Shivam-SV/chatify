@@ -11,9 +11,9 @@ export default function MessageHead(){
                     </div>
                 </div>
                 <div className="message-actions flex gap-3 items-center">
-                    <i class='bx bx-palette text-2xl'></i>
-                    <i class='bx bx-search text-2xl' ></i>
-                    <i class='bx bx-dots-vertical-rounded text-2xl'></i>
+                    <i className='bx bx-palette text-2xl'></i>
+                    <i className='bx bx-search text-2xl' ></i>
+                    <i className='bx bx-dots-vertical-rounded text-2xl'></i>
                 </div>
             </div>
         </>
