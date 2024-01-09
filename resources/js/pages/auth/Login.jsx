@@ -4,7 +4,7 @@ import AuthLayout from "../../layouts/AuthLayout";
 export default function Login(){
     return (
         <AuthLayout>
-            <div className="card p-5 border border-primary">
+            <div className="card p-5 border border-primary min-w-[25rem]">
                 <div className="card-title flex-col">
                     <h2 className="font-pacifico tracking-wide text-3xl text-primary">Chatiffy</h2>
                     <p className="text-sm text-gray-500">Loose talk, Have a Chat</p>
