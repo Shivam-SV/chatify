@@ -5,7 +5,7 @@ import ChatsHeader from "../../components/ChatsHeader";
 export default function Chats(){
     return (
         <>
-            <div className="w-auto flex flex-col h-screen border-x border-primary-content">
+            <div className="w-100 flex flex-col h-screen border-x border-primary-content">
                 <div className="border-b border-primary-content">
                     <ChatsHeader />
                 </div>
