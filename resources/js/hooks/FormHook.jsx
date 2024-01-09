@@ -31,7 +31,8 @@ export const useForm = (onSuccess) => {
 
             // if validation error occurs
             if(errs?.response?.data?.errors != undefined) setErrors(errs.response.data.errors);
-            else toast.error(err.response.data.message);
+            else if(errs?.response?.data?.message) toast.error(errs.response.data.message);
+            console.log(errs);
         }
     }
 

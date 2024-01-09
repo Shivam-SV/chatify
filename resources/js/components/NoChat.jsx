@@ -3,7 +3,7 @@ export default function NoCHat() {
         <div className="w-full h-full flex justify-center items-center flex-col">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 width="267px"
                 height="425px"
                 viewBox="0 0 335 533"
@@ -39,10 +39,10 @@ export default function NoCHat() {
                             />
                         </g>
                     </mask>
-                    <clipPath id="clip1">
+                    {/* <clipPath id="clip1">
                         <rect x="0" y="0" width="335" height="533" />
-                    </clipPath>
-                    <g id="surface5" clip-path="url(#clip1)">
+                    </clipPath> */}
+                    <g id="surface5" clipPath="url(#clip1)">
                         <path
                             style={{
                                 stroke: "none",
@@ -136,7 +136,7 @@ export default function NoCHat() {
                         }}
                         d="M 291.59375 37.535156 C 291.589844 52.1875 281.257812 64.808594 266.886719 67.714844 L 266.886719 7.355469 C 281.257812 10.261719 291.589844 22.882812 291.59375 37.535156 Z M 291.59375 37.535156 "
                     />
-                    <use xlink:href="#surface5" mask="url(#mask0)" />
+                    <use xlinkHref="#surface5" mask="url(#mask0)" />
                     <path
                         style={{
                             stroke: "none",

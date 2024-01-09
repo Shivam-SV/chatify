@@ -27,6 +27,13 @@ class UserController extends Controller
     }
 
     public function loginUser(Request $request){
+        # validating the user
 
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        return $this->service->login($request);
     }
 }

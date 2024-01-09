@@ -1,13 +1,14 @@
 import { createContext, useState } from "react";
 const AuthContext = createContext();
+import axios from "axios";
 
 function Auth ({children}){
     const authStorageKey = '__auth';
-    const defaultState = {
+    let defaultState = {
         authToken: undefined,
         name: undefined,
     };
-    if(localStorage.getItem(authStorageKey)) defaultState = atob(JSON.parse(localStorage.getItem(authStorageKey)));
+    if(localStorage.getItem(authStorageKey)) defaultState = JSON.parse(atob(localStorage.getItem(authStorageKey)));
 
     const [auth, changeAuth] = useState(defaultState);
     const actions = {

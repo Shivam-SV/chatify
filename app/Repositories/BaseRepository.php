@@ -48,7 +48,8 @@ abstract class BaseRepository{
     public function response(string $message, string $type, array $content = [], int $statusCode = 200, string|null $errorMsg = null) : Response{
         return response(array_merge([
             'message' => $message,
-            'type' => $type
+            'type' => $type,
+            'status' => $statusCode == 200 ? true : false,
         ], !empty($content) ? $content : [], $errorMsg ? ['error' => $errorMsg] : []), $statusCode);
     }
 }
