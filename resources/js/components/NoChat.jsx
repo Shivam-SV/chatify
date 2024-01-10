@@ -4,8 +4,8 @@ export default function NoCHat() {
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
-                width="267px"
-                height="425px"
+                width="150px"
+                height="308px"
                 viewBox="0 0 335 533"
                 version="1.1"
             >
@@ -18,11 +18,6 @@ export default function NoCHat() {
                         width="100%"
                         height="100%"
                     >
-                        {/* <feColorMatrix
-                        type="matrix"
-                        in="SourceGraphic"
-                        values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
-                    /> */}
                     </filter>
                     <mask id="mask0">
                         <g filter="url(#alpha)">
@@ -39,9 +34,6 @@ export default function NoCHat() {
                             />
                         </g>
                     </mask>
-                    {/* <clipPath id="clip1">
-                        <rect x="0" y="0" width="335" height="533" />
-                    </clipPath> */}
                     <g id="surface5" clipPath="url(#clip1)">
                         <path
                             style={{
